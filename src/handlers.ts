@@ -323,7 +323,7 @@ export function handleGetSession(args: Record<string, unknown>): ToolResponse {
 export function handleSemanticSearch(_args: Record<string, unknown>): ToolResponse {
   return {
     success: false,
-    message: "Search feature coming soon! Stay tuned for natural language search across your sessions.",
+    message: "Coming soon.",
     error: "NOT_IMPLEMENTED",
   };
 }
@@ -334,7 +334,7 @@ export function handleSemanticSearch(_args: Record<string, unknown>): ToolRespon
 export function handleFindRelatedSessions(_args: Record<string, unknown>): ToolResponse {
   return {
     success: false,
-    message: "Find related sessions feature coming soon! Stay tuned for discovering similar past work.",
+    message: "Coming soon.",
     error: "NOT_IMPLEMENTED",
   };
 }
