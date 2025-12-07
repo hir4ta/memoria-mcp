@@ -45,14 +45,14 @@ memoria-mcp init
 ## CLI
 
 ```bash
-memoria-mcp init              # Initialize .memoria/ in current directory
-memoria-mcp init my-project   # Initialize with project name
-memoria-mcp status            # Show project status
+memoria-mcp init        # Initialize .memoria/ in current directory
+memoria-mcp init        # Initialize with project name
+memoria-mcp status      # Show project status
 ```
 
 ## Data Storage
 
-```
+```text
 .memoria/
 ├── config.json
 ├── index.json

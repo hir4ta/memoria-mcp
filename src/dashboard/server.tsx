@@ -26,16 +26,10 @@ const DEFAULT_PORT = 3456;
 function renderPage(sessions: Session[], selectedSession?: Session): string {
   const appHtml = renderToString(
     <App
-      initialSessions={sessions}
-      initialSessionId={selectedSession?.id}
+      sessions={sessions}
+      selectedSession={selectedSession}
     />
   );
-
-  // Serialize data for hydration
-  const initialData = JSON.stringify({
-    sessions,
-    selectedSessionId: selectedSession?.id || null,
-  }).replace(/</g, "\\u003c");
 
   return `<!DOCTYPE html>
 <html>
@@ -47,9 +41,6 @@ function renderPage(sessions: Session[], selectedSession?: Session): string {
 </head>
 <body>
   <div id="root">${appHtml}</div>
-  <script>
-    window.__INITIAL_DATA__ = ${initialData};
-  </script>
 </body>
 </html>`;
 }
@@ -64,10 +55,11 @@ function render404(): string {
   <meta charset="utf-8">
   <title>Not Found - Memoria</title>
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #0d1117; color: #c9d1d9; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #f9fafb; color: #111827; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
     .container { text-align: center; }
-    h1 { font-size: 48px; margin-bottom: 16px; }
-    a { color: #58a6ff; }
+    h1 { font-size: 48px; margin-bottom: 16px; color: #111827; }
+    p { color: #6b7280; }
+    a { color: #2563eb; }
   </style>
 </head>
 <body>
@@ -89,10 +81,11 @@ function renderNotInitialized(): string {
   <meta charset="utf-8">
   <title>Memoria Dashboard</title>
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #0d1117; color: #c9d1d9; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #f9fafb; color: #111827; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
     .container { text-align: center; }
-    h1 { font-size: 24px; margin-bottom: 16px; }
-    code { background: #21262d; padding: 8px 16px; border-radius: 4px; display: inline-block; margin-top: 8px; }
+    h1 { font-size: 24px; margin-bottom: 16px; color: #111827; }
+    p { color: #6b7280; }
+    code { background: #f3f4f6; padding: 8px 16px; border-radius: 6px; display: inline-block; margin-top: 8px; border: 1px solid #e5e7eb; }
   </style>
 </head>
 <body>
