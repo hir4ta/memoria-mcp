@@ -1,13 +1,13 @@
 # memoria-mcp
 
-Local-first MCP server for AI coding session management. Save, search, and resume your Claude Code sessions.
+Local-first MCP server for AI coding session management. Save and resume your Claude Code sessions.
 
 ## Features
 
 - **Save Sessions** - Track your coding sessions with checkpoints
 - **Local Storage** - All data stored in `.memoria/` at project root
 - **No Account Required** - Works offline, no signup needed
-- **Search** (Paid) - BM25 + semantic search across sessions
+- **Search** (Coming Soon) - BM25 + semantic search across sessions
 
 ## Installation
 
@@ -34,7 +34,7 @@ The MCP server will now be available in your project.
 
 Once installed, Claude Code will automatically have access to these tools:
 
-### Free Tools
+### Available Tools
 
 | Tool | Description |
 |------|-------------|
@@ -44,28 +44,22 @@ Once installed, Claude Code will automatically have access to these tools:
 | `continue_context` | List in-progress sessions to resume |
 | `get_session` | Get full session details |
 
-### Paid Tools ($2/month)
+### Coming Soon
 
 | Tool | Description |
 |------|-------------|
 | `semantic_search` | Natural language search across sessions |
 | `find_related_sessions` | Find similar past work |
 
-To enable paid features:
-```bash
-npx memoria-mcp activate <your-license-key>
-```
-
-Get your license key at [memoria.dev/pricing](https://memoria.dev/pricing)
-
 ## CLI Commands
 
 ```bash
 # Initialize in current directory
-npx memoria-mcp init [project-name]
+cd your-project
+npx memoria-mcp init
 
-# Activate license for search features
-npx memoria-mcp activate <license-key>
+# Optionally specify project name
+npx memoria-mcp init my-project
 
 # Show project status
 npx memoria-mcp status

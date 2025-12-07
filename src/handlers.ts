@@ -9,7 +9,6 @@ import {
   saveSession,
   loadSession,
   loadInProgressSessions,
-  loadAllSessions,
   generateSessionId,
   generateCheckpointId,
   extractTitle,
@@ -319,72 +318,23 @@ export function handleGetSession(args: Record<string, unknown>): ToolResponse {
 }
 
 /**
- * Handle semantic_search (PAID feature)
+ * Handle semantic_search (Coming Soon)
  */
-export function handleSemanticSearch(args: Record<string, unknown>): ToolResponse {
-  if (!isInitialized()) {
-    return {
-      success: false,
-      message: "Memoria not initialized. Run `memoria-mcp init` first.",
-      error: "NOT_INITIALIZED",
-    };
-  }
-
-  const config = loadConfig();
-  if (!config?.licenseKey) {
-    return {
-      success: false,
-      message: `Search is a paid feature ($2/month).
-
-To enable:
-1. Get a license key at https://memoria.dev/pricing
-2. Run: memoria-mcp activate <your-license-key>
-
-This supports continued development of memoria-mcp.`,
-      error: "LICENSE_REQUIRED",
-    };
-  }
-
-  // TODO: Implement cloud API call for search
-  // For now, return placeholder
+export function handleSemanticSearch(_args: Record<string, unknown>): ToolResponse {
   return {
     success: false,
-    message: "Search API not yet implemented. Coming soon!",
+    message: "Search feature coming soon! Stay tuned for natural language search across your sessions.",
     error: "NOT_IMPLEMENTED",
   };
 }
 
 /**
- * Handle find_related_sessions (PAID feature)
+ * Handle find_related_sessions (Coming Soon)
  */
-export function handleFindRelatedSessions(args: Record<string, unknown>): ToolResponse {
-  if (!isInitialized()) {
-    return {
-      success: false,
-      message: "Memoria not initialized. Run `memoria-mcp init` first.",
-      error: "NOT_INITIALIZED",
-    };
-  }
-
-  const config = loadConfig();
-  if (!config?.licenseKey) {
-    return {
-      success: false,
-      message: `Find related sessions is a paid feature ($2/month).
-
-To enable:
-1. Get a license key at https://memoria.dev/pricing
-2. Run: memoria-mcp activate <your-license-key>
-
-This supports continued development of memoria-mcp.`,
-      error: "LICENSE_REQUIRED",
-    };
-  }
-
-  // TODO: Implement cloud API call for related sessions
+export function handleFindRelatedSessions(_args: Record<string, unknown>): ToolResponse {
   return {
     success: false,
-    message: "Related sessions API not yet implemented. Coming soon!",
+    message: "Find related sessions feature coming soon! Stay tuned for discovering similar past work.",
     error: "NOT_IMPLEMENTED",
   };
 }

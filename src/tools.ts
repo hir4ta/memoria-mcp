@@ -352,11 +352,7 @@ Use after continue_context or semantic_search to get full session details.`,
     name: "semantic_search",
     description: `Search sessions using natural language queries.
 
-**NOTE:** This is a PAID feature ($2/month). Requires license key.
-Run \`memoria-mcp activate <key>\` to enable.
-
-Without license: Returns error with activation instructions.
-With license: Uses BM25 + semantic search via cloud API.`,
+**STATUS:** Coming soon! This feature is under development.`,
     inputSchema: {
       type: "object",
       properties: {
@@ -380,12 +376,7 @@ With license: Uses BM25 + semantic search via cloud API.`,
     name: "find_related_sessions",
     description: `Find sessions related to current work.
 
-**NOTE:** This is a PAID feature ($2/month). Requires license key.
-
-Searches by:
-- File overlap: Sessions that modified same files
-- Keywords: Sessions with similar topics
-- Session ID: Find similar sessions`,
+**STATUS:** Coming soon! This feature is under development.`,
     inputSchema: {
       type: "object",
       properties: {

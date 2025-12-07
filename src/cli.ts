@@ -22,7 +22,7 @@ import {
   loadAllSessions,
 } from "./storage";
 
-const VERSION = "0.1.0";
+const VERSION = "0.1.1";
 
 function showHelp(): void {
   console.log(`
@@ -35,9 +35,6 @@ Commands:
   init [name]      Initialize .memoria/ in current directory
                    Optional: specify project name
 
-  activate <key>   Activate license key for search features
-                   Get your key at https://memoria.dev/pricing
-
   status           Show status of current project
 
   dashboard        Start local web dashboard (coming soon)
@@ -49,10 +46,10 @@ Installation (Claude Code):
   claude mcp add memoria -- npx -y memoria-mcp-server
 
 Examples:
-  memoria-mcp init
-  memoria-mcp init my-project
-  memoria-mcp activate sk_live_xxxxx
-  memoria-mcp status
+  cd your-project
+  npx memoria-mcp init
+  npx memoria-mcp init my-project
+  npx memoria-mcp status
 `);
 }
 
@@ -89,34 +86,9 @@ function cmdInit(projectName?: string): void {
   console.log("     version control your session data.");
 }
 
-function cmdActivate(licenseKey?: string): void {
-  if (!isInitialized()) {
-    console.log("Error: Memoria not initialized.");
-    console.log("Run `memoria-mcp init` first.");
-    return;
-  }
-
-  if (!licenseKey) {
-    console.log("Error: License key required.");
-    console.log("Usage: memoria-mcp activate <license-key>");
-    console.log("\nGet your license key at https://memoria.dev/pricing");
-    return;
-  }
-
-  // TODO: Validate license key with cloud API
-  // For now, just save it locally
-
-  const config = loadConfig();
-  if (!config) {
-    console.log("Error: Failed to load config.");
-    return;
-  }
-
-  config.licenseKey = licenseKey;
-  saveConfig(config);
-
-  console.log("✓ License key saved successfully!\n");
-  console.log("Search features are now enabled:");
+function cmdActivate(_licenseKey?: string): void {
+  console.log("Search features coming soon!\n");
+  console.log("Stay tuned for:");
   console.log("  - semantic_search: Natural language search");
   console.log("  - find_related_sessions: Find similar past work");
 }
@@ -141,7 +113,6 @@ function cmdStatus(): void {
   console.log("Memoria Status\n");
   console.log(`Project:     ${config.project}`);
   console.log(`Directory:   ${getMemoriaDir()}`);
-  console.log(`License:     ${config.licenseKey ? "Active ✓" : "Not activated"}`);
   console.log("");
   console.log(`Sessions:    ${sessions.length} total`);
   console.log(`  In Progress: ${inProgress.length}`);
@@ -155,12 +126,6 @@ function cmdStatus(): void {
     if (inProgress.length > 5) {
       console.log(`  ... and ${inProgress.length - 5} more`);
     }
-  }
-
-  if (!config.licenseKey) {
-    console.log("\nTip: Activate a license key to enable search features:");
-    console.log("     memoria-mcp activate <your-key>");
-    console.log("     Get your key at https://memoria.dev/pricing");
   }
 }
 

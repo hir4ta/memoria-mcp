@@ -1,6 +1,6 @@
 {
   "name": "memoria-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Local-first MCP server for AI coding session management - save, search, and resume your Claude Code sessions",
   "type": "module",
   "bin": {
