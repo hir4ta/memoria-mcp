@@ -22,25 +22,26 @@ import {
   loadAllSessions,
 } from "./storage";
 
-const VERSION = "0.1.1";
+const VERSION = "0.1.3";
 
 function showHelp(): void {
   console.log(`
 Usage: memoria-mcp <command>
 
 Commands:
-  init [name]    Initialize .memoria/ in current directory
-  status         Show project status
-  dashboard      Start web dashboard (coming soon)
+  init [name]      Initialize .memoria/ in current directory
+  status           Show project status
+  dashboard [port] Start web dashboard (default: 3456)
 
 Options:
-  --help, -h     Show help
-  --version, -v  Show version
+  --help, -h       Show help
+  --version, -v    Show version
 
 Examples:
   memoria-mcp init
-  memoria-mcp init my-project
   memoria-mcp status
+  memoria-mcp dashboard
+  memoria-mcp dashboard 8080
 `);
 }
 
@@ -98,8 +99,32 @@ function cmdStatus(): void {
   }
 }
 
-function cmdDashboard(): void {
-  console.log("Coming soon.");
+function cmdDashboard(portArg?: string): void {
+  if (!isInitialized()) {
+    console.log("Not initialized. Run: memoria-mcp init");
+    return;
+  }
+
+  const port = portArg ? parseInt(portArg) : 3456;
+  if (isNaN(port)) {
+    console.log("Invalid port number.");
+    return;
+  }
+
+  // Spawn dashboard server as separate process
+  const { spawn } = require("child_process");
+  const path = require("path");
+  const url = require("url");
+  const currentDir = path.dirname(url.fileURLToPath(import.meta.url));
+  const dashboardPath = path.join(currentDir, "dashboard.js");
+
+  const child = spawn("node", [dashboardPath, port.toString()], {
+    stdio: "inherit",
+  });
+
+  child.on("error", () => {
+    console.log("Failed to start dashboard. Make sure Node.js is installed.");
+  });
 }
 
 // Parse arguments
@@ -117,7 +142,7 @@ if (!command || command === "--help" || command === "-h") {
 } else if (command === "status") {
   cmdStatus();
 } else if (command === "dashboard") {
-  cmdDashboard();
+  cmdDashboard(args[1]);
 } else {
   console.log(`Unknown command: ${command}`);
   showHelp();
