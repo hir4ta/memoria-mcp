@@ -1,0 +1,45 @@
+{
+  "name": "memoria-mcp",
+  "version": "0.1.0",
+  "description": "Local-first MCP server for AI coding session management - save, search, and resume your Claude Code sessions",
+  "type": "module",
+  "bin": {
+    "memoria-mcp": "dist/cli.js",
+    "memoria-mcp-server": "dist/server.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "bun build src/cli.ts --outfile dist/cli.js --target node && bun build src/server.ts --outfile dist/server.js --target node",
+    "dev": "bun run --watch src/cli.ts",
+    "prepublishOnly": "bun run build"
+  },
+  "keywords": [
+    "mcp",
+    "modelcontextprotocol",
+    "claude",
+    "claude-code",
+    "ai",
+    "coding-sessions",
+    "local-first",
+    "session-management"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/bun": "*",
+    "@types/node": "^22.0.0"
+  }
+}
