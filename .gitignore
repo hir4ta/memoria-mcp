@@ -29,4 +29,6 @@ npm-debug.log*
 # Local memoria data (for testing)
 .memoria/
 
+# Claude Code
 CLAUDE.md
+.claude/
